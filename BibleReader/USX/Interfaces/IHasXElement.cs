@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BibleReader.USFM
+namespace BibleReader.USX
 {
-    internal class Bible
+    internal interface IHasXElement
     {
+        public XElement Element { get; }
+
     }
 }

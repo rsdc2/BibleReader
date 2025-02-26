@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BibleReader.USFM
+namespace BibleReader.USX
 {
-    internal class P
+    internal class Bible
     {
     }
 }

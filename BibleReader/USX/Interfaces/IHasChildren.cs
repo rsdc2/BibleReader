@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BibleReader.USFM
+namespace BibleReader.USX.Interfaces
 {
-    internal class H
+    internal interface IHasChildren
     {
+        IEnumerable<IHasXElement> Children { get; }
     }
 }

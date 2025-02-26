@@ -1,4 +1,4 @@
-﻿using BibleReader.USFM.Interfaces;
+﻿using BibleReader.USX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace BibleReader.USFM
+namespace BibleReader.USX
 {
-    internal class Misc : IBibleElement
+    internal class Misc : IHasXElement
     {
         public XElement Element { get; init; }
     }
