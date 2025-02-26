@@ -1,13 +1,13 @@
-﻿using BibleReader.USX.Interfaces;
+﻿using BibleReader.Usx.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Xml;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
-namespace BibleReader.USX
+namespace BibleReader.Usx
 {
     internal class Book : IHasXElement, IHasId, IHasStyle, IHasText
     {
@@ -22,5 +22,7 @@ namespace BibleReader.USX
         {
             Element = element;
         }
+
+
     }
 }

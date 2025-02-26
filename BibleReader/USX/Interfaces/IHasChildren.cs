@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BibleReader.USX.Interfaces
+namespace BibleReader.Usx.Interfaces
 {
     internal interface IHasChildren
     {

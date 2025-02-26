@@ -9,6 +9,7 @@ using System.Windows;
 
 using System.Xml;
 using System.Xml.Linq;
+using BibleReader.Usx;
 
 namespace BibleReader;
 
@@ -23,5 +24,7 @@ public class BibleDocReader
 
 
     }
+
+
 
 }

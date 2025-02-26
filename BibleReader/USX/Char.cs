@@ -1,4 +1,4 @@
-﻿using BibleReader.USX.Interfaces;
+﻿using BibleReader.Usx.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml;
 
-namespace BibleReader.USX
+namespace BibleReader.Usx
 {
-    internal class Char : IHasText, IHasStyle, IHasXElement
+    internal class Char : IHasText, IHasXElement
     {
-        public string? Style {  }
+        //public string? Style {  }
         public XElement Element { get; }
 
         public Char(XElement element)

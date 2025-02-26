@@ -5,17 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace BibleReader.USX
+namespace BibleReader.Usx
 {
-    internal class Chapter : IHasXElement, IHasStyle
+    public class Chapter : IHasXElement, IHasStyle
     {
         public string Eid { get; }
         public string Style { get; }
         public string Number { get; }
 
         public XElement Element { get; init; }
-
-        public IEnumerable<Verse>
 
         public Chapter(XElement element) 
         {

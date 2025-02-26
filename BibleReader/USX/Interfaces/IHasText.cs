@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace BibleReader.USX.Interfaces
+namespace BibleReader.Usx.Interfaces
 {
     internal interface IHasText : IHasXElement
     {
-        IEnumerable<XNode> Text { get => Element.DescendantNodes().Where(node => node.NodeType == XmlNodeType.Text); }
+        IEnumerable<XNode> TextNodes { get => Element.Nodes().Where(node => node.NodeType == XmlNodeType.Text); }
     }
 }

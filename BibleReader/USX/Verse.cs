@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BibleReader.USX
+namespace BibleReader.Usx
 {
     internal class Verse : IHasXElement, IHasStyle
     {
