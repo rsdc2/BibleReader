@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx;
 
-public interface IUsxElement
+public interface IUsxElement : IUsxNode
 {
     public XElement Element { get; }
 

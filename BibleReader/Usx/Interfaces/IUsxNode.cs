@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace BibleReader.Usx.Interfaces
+namespace BibleReader.Usx
 {
-    public interface IStartMarker : IMarker
+    public interface IUsxNode
     {
-        string? Sid { get; } 
+        public XNode Node { get; }
     }
 }

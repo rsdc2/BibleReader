@@ -13,9 +13,11 @@ namespace BibleReader.Usx
     {
         public string? Eid { get => Element.Attribute("eid")?.Value; }
         public XElement Element { get; init; }
+        public XNode Node { get; }
         public VerseEnd(XElement element) 
         {
             Element = element;
+            Node = element;
         }
         public static VerseEnd Create(XElement element) => new VerseEnd(element);
         public override string ToString() => $"VerseStart(sid='{Eid}')";

@@ -11,27 +11,40 @@ using System.Windows.Controls;
 
 namespace BibleReader.Usx
 {
-    public class Para : IHasText, IHasStyle, IUsxElement, IHasChildren
+    public class Para : IUsxElement, IHasChildren, IHasTextChildren
     {
+        public XNode Node { get; }
         public XElement Element { get; }
-        public IEnumerable<XText> ChildTextNodes { get => Element.Nodes()
-                                                        .Where(node => node.NodeType == XmlNodeType.Text)
-                                                        .Select(text => (XText)text); }
-        public string ChildText { get => String.Concat(ChildTextNodes.Select(text => (text.Value))); }
-        public IEnumerable<IUsxElement> Children { get => Element.Elements()
-                                                            .Select(UsxElement.Create); }
+        public string Style { get => Element.Attribute("style")?.Value ?? ""; }
+        public IEnumerable<IAtomicText> AtomicTextNodes { 
+            get => Element.Nodes().Where(UsxNode.IsAtomicTextNode)
+                                  .Select(node => (IAtomicText)UsxNode.Create(node)); 
+        }
+        public IEnumerable<IUsxElement> ChildElements { 
+            get => Element.Elements().Select(UsxElement.Create); 
+        }
+        public IEnumerable<IUsxNode> ChildNodes {
+            get => Element.Nodes().Select(UsxNode.Create);
+        }
+        public IEnumerable<IHasStyle> StyleNodes
+        {
+            get => ChildElements.Where(elem => elem.Element.Attribute("style") is not null)
+                                .Select(elem => (IHasStyle)elem );
+        }
         public Para(XElement element)
         {
             Element = element;
+            Node = element;
         }
         public static Para Create(XElement element) => new Para(element);
-
         public Paragraph ToParagraph()
         {
             Paragraph paragraph = new Paragraph();
-            paragraph.Inlines.Add(ChildText);
+            var runs = this.ToRuns();
+            paragraph.Inlines.AddRange(runs);
             return paragraph;
         }
-        public override string ToString() => $"Para('{ChildText}')";
+        public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
+        public override string ToString() => $"Para()";
     }
 }

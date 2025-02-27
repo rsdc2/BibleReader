@@ -11,22 +11,25 @@ using System.Security.AccessControl;
 
 namespace BibleReader.Usx
 {
-    internal class UsxDoc : IUsxElement
+    internal class UsxDoc : IUsxElement, IHasChildren
     {
+        public XNode Node { get; }
         public XElement Element { get; }
-        public IEnumerable<IUsxElement> Children {
-            get => Element.Nodes()
-                            .Where(child => child.NodeType == XmlNodeType.Element)
-                            .Select(element => UsxElement.Create((XElement)element));
+        public IEnumerable<IUsxElement> ChildElements {
+            get => Element.Elements().Select(UsxElement.Create);
         }
-
+        public IEnumerable<IUsxNode> ChildNodes
+        {
+            get => Element.Nodes().Select(UsxNode.Create);
+        }
         public IEnumerable<Para> Paras
         {
-            get => Children.OfType<Para>();
+            get => ChildElements.OfType<Para>();
         }
         public UsxDoc(XElement element)
         {
             Element = element;
+            Node = element;
         }
         public static UsxDoc FromPath(string path)
         {
@@ -35,7 +38,5 @@ namespace BibleReader.Usx
             if (rootElem is null) throw new Exception("No root element");
             return new UsxDoc(rootElem);
         }
-
-
     }
 }

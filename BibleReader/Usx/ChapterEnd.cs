@@ -12,9 +12,11 @@ namespace BibleReader.Usx
     {
         public string? Eid { get => Element.Attribute("eid")?.Value; }
         public XElement Element { get; init; }
+        public XNode Node { get; }
         public ChapterEnd(XElement element) 
         {
             Element = element;
+            Node = element;
         }
         public static ChapterEnd Create(XElement element) => new ChapterEnd(element);
         public override string ToString() => 

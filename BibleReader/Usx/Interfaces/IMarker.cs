@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx.Interfaces
 {
-    internal interface IMarker : IHasStyle
+    public interface IMarker : IHasStyle
     {
         string? Number { get; }
     }

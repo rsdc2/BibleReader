@@ -15,7 +15,7 @@ public class UsxElement
         "para" => Para.Create(element),
         "book" => BookStart.Create(element),
         "chapter" => IsStartMarker(element) ? ChapterStart.Create(element) : ChapterEnd.Create(element),
-        "verse" => IsEndMarker(element) ? VerseStart.Create(element) : VerseEnd.Create(element),
+        "verse" => IsStartMarker(element) ? VerseStart.Create(element) : VerseEnd.Create(element),
         "char" => Char.Create(element),
         _ => Misc.Create(element)
     };
@@ -29,6 +29,16 @@ public class UsxElement
     element.Attributes()
             .Select(attr => attr.Name.LocalName)
             .Contains("eid");
+    public static bool IsAtomicTextElement(XElement element) => element.Name.LocalName switch
+    {
+        "para" => false,
+        "book" => true,
+        "chapter" => IsStartMarker(element) ? true : false,
+        "verse" => IsStartMarker(element) ? true : false,
+        "char" => false,
+        _ => false
+    };
+
 
     public static Paragraph ToParagraph(Para para) => para.ToParagraph();
 

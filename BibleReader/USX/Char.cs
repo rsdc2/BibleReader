@@ -9,28 +9,27 @@ using System.Xml;
 
 namespace BibleReader.Usx
 {
-    internal class Char : IHasText, IUsxElement
+    internal class Char : IUsxElement
     {
-        //public string? Style {  }
+        public XNode Node { get; }
         public XElement Element { get; }
-
-        public IEnumerable<XText> ChildTextNodes
+        public string Style { get => throw new NotImplementedException(); }
+        public IEnumerable<XText> TextNodes
         {
             get => Element.Nodes()
                     .Where(node => node.NodeType == XmlNodeType.Text)
                     .Select(text => (XText)text);
         }
-
-        public string ChildText { 
-            get => String.Concat(ChildTextNodes.Select(text => (text.Value))); 
+        public string Text { 
+            get => TextNodes.Select(text => (text.Value)).Aggregate(String.Concat); 
         }
-
         public Char(XElement element)
         {
             Element = element;
+            Node = element;
         }
-
         public static Char Create(XElement element) => new Char(element);
 
+        public string ReaderString { get => Text; }
     }
 }

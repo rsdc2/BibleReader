@@ -10,22 +10,21 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BibleReader.Usx;
 
-namespace BibleReader
+namespace BibleReader;
+
+public partial class MainWindow : Window
 {
-
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            FlowDocument doc = new FlowDocument();
+        FlowDocument doc = new FlowDocument();
 
-            UsxDoc usx = UsxDoc.FromPath("Resources/gen.usx");
-            IEnumerable<Paragraph> paras = usx.Paras.Select(UsxElement.ToParagraph);
-            doc.Blocks.AddRange(paras);
+        UsxDoc usx = UsxDoc.FromPath("Resources/gen.usx");
+        var paras = usx.Paras.Select(UsxElement.ToParagraph).ToList();
+        //IEnumerable<Paragraph> paras = paras.Select
+        doc.Blocks.AddRange(paras);
 
-            bibleDocReader.Document = doc;
-        }
+        bibleDocReader.Document = doc;
     }
 }
