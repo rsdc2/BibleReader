@@ -4,8 +4,6 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Security.Cryptography;
 using System.Windows;
 using BibleReader.Usx.Interfaces;
 

@@ -22,7 +22,7 @@ namespace BibleReader
             FlowDocument doc = new FlowDocument();
 
             UsxDoc usx = UsxDoc.FromPath("Resources/gen.usx");
-            IEnumerable<Paragraph> paras = usx.Paras.Select(para => new Paragraph(new Run(para.ChildText)));
+            IEnumerable<Paragraph> paras = usx.Paras.Select(UsxElement.ToParagraph);
             doc.Blocks.AddRange(paras);
 
             bibleDocReader.Document = doc;

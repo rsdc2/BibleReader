@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Xml.Linq;
 
 namespace BibleReader.Usx;
@@ -28,5 +29,7 @@ public class UsxElement
     element.Attributes()
             .Select(attr => attr.Name.LocalName)
             .Contains("eid");
+
+    public static Paragraph ToParagraph(Para para) => para.ToParagraph();
 
 }
