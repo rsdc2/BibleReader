@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BibleReader.Usx
+namespace BibleReader.Usx.Interfaces
 {
-    internal class Bible
+    internal interface IStartMarker : IMarker
     {
+        string? Sid { get; } 
     }
 }

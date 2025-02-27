@@ -21,10 +21,9 @@ namespace BibleReader
 
             FlowDocument doc = new FlowDocument();
 
-            UsxElem usx = UsxElem.FromPath("Resources/gen.usx");
-
-            Paragraph p = new Paragraph(new Run("In the beginning was the Word."));
-            doc.Blocks.Add(p);
+            UsxDoc usx = UsxDoc.FromPath("Resources/gen.usx");
+            IEnumerable<Paragraph> paras = usx.Paras.Select(para => new Paragraph(new Run(para.ChildText)));
+            doc.Blocks.AddRange(paras);
 
             bibleDocReader.Document = doc;
         }

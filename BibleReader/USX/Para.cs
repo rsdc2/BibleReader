@@ -9,15 +9,18 @@ using System.Xml.Linq;
 
 namespace BibleReader.Usx
 {
-    internal class Para : IHasText, IHasStyle, IHasXElement, IHasChildren
+    internal class Para : IHasText, IHasStyle, IUsxElement, IHasChildren
     {
         public XElement Element { get; }
 
-        public IEnumerable<XNode> TextNodes { get => Element.Nodes().Where(node => node.NodeType == XmlNodeType.Text); }
+        public IEnumerable<XText> ChildTextNodes { get => Element.Nodes()
+                                                        .Where(node => node.NodeType == XmlNodeType.Text)
+                                                        .Select(text => (XText)text); }
 
-        public string Text { get => String.Concat(TextNodes.Select(node => ((XText)node).Value)); }
+        public string ChildText { get => String.Concat(ChildTextNodes.Select(text => (text.Value))); }
 
-        public IEnumerable<IHasXElement> Children { get; }
+        public IEnumerable<IUsxElement> Children { get => Element.Elements()
+                                                            .Select(UsxElement.Create); }
 
         public Para(XElement element)
         {
@@ -25,6 +28,7 @@ namespace BibleReader.Usx
         }
 
         public static Para Create(XElement element) => new Para(element);
-        public override string ToString() => Text;
+
+        public override string ToString() => $"Para('{ChildText}')";
     }
 }

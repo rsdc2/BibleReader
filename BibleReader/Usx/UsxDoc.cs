@@ -6,33 +6,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml;
+using System.Security.AccessControl;
 
 
 namespace BibleReader.Usx
 {
-    internal class UsxElem : IHasXElement
+    internal class UsxDoc : IUsxElement
     {
-
         public XElement Element { get; }
-        public List<Para> Children { 
+        public IEnumerable<IUsxElement> Children {
             get => Element.Nodes()
                             .Where(child => child.NodeType == XmlNodeType.Element)
-                            .Select(element => (XElement)element)
-                            .Where(element => element.Name == "para")
-                            .Select(Para.Create).ToList(); 
+                            .Select(element => UsxElement.Create((XElement)element));
         }
 
-        public UsxElem(XElement element)
+        public IEnumerable<Para> Paras
+        {
+            get => Children.OfType<Para>();
+        }
+        public UsxDoc(XElement element)
         {
             Element = element;
         }
-
-        public static UsxElem FromPath(string path)
+        public static UsxDoc FromPath(string path)
         {
             var xmlDoc = XDocument.Load(path);
             XElement? rootElem = xmlDoc.Root;
             if (rootElem is null) throw new Exception("No root element");
-            return new UsxElem(rootElem);
+            return new UsxDoc(rootElem);
         }
+
+
     }
 }

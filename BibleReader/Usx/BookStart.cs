@@ -9,20 +9,19 @@ using System.Xml.Linq;
 
 namespace BibleReader.Usx
 {
-    internal class Book : IHasXElement, IHasId, IHasStyle, IHasText
+    internal class BookStart : IUsxElement
     {
-        public string? Id { get; }
         public string Code { get; }
         public string Text { get; }
         public XElement Element { get; }
         public string Style { get; }
-        public IEnumerable<Chapter> Chapters { get; init; }
+        public IEnumerable<ChapterEnd> Chapters { get; init; }
 
-        public Book(XElement element)
+        public BookStart(XElement element)
         {
             Element = element;
         }
-
+        public static BookStart Create(XElement element) => new BookStart(element);
 
     }
 }

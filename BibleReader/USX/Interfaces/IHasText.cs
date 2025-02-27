@@ -8,8 +8,10 @@ using System.Xml.Linq;
 
 namespace BibleReader.Usx.Interfaces
 {
-    internal interface IHasText : IHasXElement
+    internal interface IHasText : IUsxElement
     {
-        IEnumerable<XNode> TextNodes { get => Element.Nodes().Where(node => node.NodeType == XmlNodeType.Text); }
+        IEnumerable<XText> ChildTextNodes { get; }
+
+        string ChildText { get; }
     }
 }

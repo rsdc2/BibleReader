@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx
 {
-    internal interface IHasStyle : IHasXElement
+    internal interface IHasStyle : IUsxElement
     {
         string? Style { get => Element.Attribute("style")?.Value; }
     }
