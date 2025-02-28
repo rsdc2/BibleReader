@@ -20,24 +20,37 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void btnOpenFileDlg_Click(object sender, RoutedEventArgs e)
+    private void menuLoadBible_Click(object sender, RoutedEventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
         openFileDialog.Filter = "USX Files (*.usx)|*.usx";
         openFileDialog.FilterIndex = 0;
         if (openFileDialog.ShowDialog() == true)
         {
+            HandleLoadBible(openFileDialog);
+        }
+    }
+
+    public void HandleLoadBible(OpenFileDialog openFileDialog)
+    {
+        FlowDocument doc = new FlowDocument();
+        try
+        {
             UsxDoc usx = UsxDoc.FromPath(openFileDialog.FileName);
             var paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
-            FlowDocument doc = new FlowDocument();
             doc.Blocks.AddRange(paras);
+            bibleDocReader.IsTwoPageViewEnabled = true;
+        }
+        catch (Exception ex)
+        {
+            var errorMessage = Errors.LoadError(ex.Message);
+            doc.Blocks.AddRange(errorMessage);
+            bibleDocReader.IsTwoPageViewEnabled = false;
+        }
+        finally
+        {
             bibleDocReader.Document = doc;
         }
-
     }
 
-    private void MenuItem_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
 }
