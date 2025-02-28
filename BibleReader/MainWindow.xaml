@@ -10,7 +10,7 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_Open" Click="btnOpenFileDlg_Click"/>
+                    <MenuItem Header="_Load Bible" Click="btnOpenFileDlg_Click"/>
                 </MenuItem>
             </Menu>
 
