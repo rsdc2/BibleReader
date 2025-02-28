@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BibleReader.Usx;
+using Microsoft.Win32;
 
 namespace BibleReader;
 
@@ -18,12 +19,22 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        FlowDocument doc = new FlowDocument();
+        
 
-        UsxDoc usx = UsxDoc.FromPath("Resources/tnt/mat.usx");
-        var paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
-        doc.Blocks.AddRange(paras);
 
-        bibleDocReader.Document = doc;
+    }
+
+    private void btnOpenFileDlg_Click(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        if (openFileDialog.ShowDialog() == true)
+        {
+            UsxDoc usx = UsxDoc.FromPath("Resources/tnt/mat.usx");
+            var paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
+            FlowDocument doc = new FlowDocument();
+            doc.Blocks.AddRange(paras);
+            bibleDocReader.Document = doc;
+        }
+
     }
 }
