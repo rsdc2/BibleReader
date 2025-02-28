@@ -362,5 +362,8 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+# BibleReader
 BibleReader/Resources/**/*.xml
 BibleReader/Resources/**/*.usx
+*.rng
+*.rnc
