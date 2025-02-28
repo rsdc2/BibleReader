@@ -23,6 +23,8 @@ public partial class MainWindow : Window
     private void btnOpenFileDlg_Click(object sender, RoutedEventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "USX Files (*.usx)|*.usx";
+        openFileDialog.FilterIndex = 0;
         if (openFileDialog.ShowDialog() == true)
         {
             UsxDoc usx = UsxDoc.FromPath("Resources/tnt/mat.usx");
