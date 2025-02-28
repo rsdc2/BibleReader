@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using BibleReader.Usx.Interfaces;
+using BibleReader.Usx.Styles;
 using System.Windows.Documents;
 
 namespace BibleReader.Usx
@@ -15,7 +16,7 @@ namespace BibleReader.Usx
         public XElement Element { get; init; }
         public XNode Node { get; }
         public string? Sid { get => Element.Attribute("sid")?.Value; }
-        public string? Style { get => Element.Attribute("style")?.Value; }
+        public string Style { get => Element.Attribute("style")?.Value ?? ""; }
         public IEnumerable<IHasStyle> StyleNodes {
             get => [this];
         }
@@ -27,13 +28,8 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static VerseStart Create(XElement element) => new VerseStart(element);
-        public Run ToRun() 
-        {
-            var run = new Run(" " + Text + " ");
-            run.Typography.Variants = FontVariants.Superscript;
-            return run;
-        }
+        public Run ToRun() => UsxRunStyle.ApplyStyle(Style)(new Run(Text));
         public override string ToString() => $"VerseEnd(eid='{Sid}' style='{Style}' number='{Number}')";
-        public string ReaderString { get => Number ?? ""; }
+
     }
 }

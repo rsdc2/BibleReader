@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx.Styles;
 
-public enum StyleEnum
+public enum UsxStyles
 {
     H,
     Toc1,

@@ -1,4 +1,5 @@
 ﻿using BibleReader.Usx.Interfaces;
+using BibleReader.Usx.Styles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Windows.Documents;
-using System.Windows.Controls;
+
 
 namespace BibleReader.Usx
 {
-    public class Para : IUsxElement, IHasChildren, IHasTextChildren
+    public class Para : IUsxElement, IHasChildren, IHasTextChildren, IHasStyle
     {
         public XNode Node { get; }
         public XElement Element { get; }
@@ -42,7 +43,8 @@ namespace BibleReader.Usx
             Paragraph paragraph = new Paragraph();
             var runs = this.ToRuns();
             paragraph.Inlines.AddRange(runs);
-            return paragraph;
+
+            return UsxParaStyle.ApplyStyle(Style)(paragraph);
         }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
         public override string ToString() => $"Para()";

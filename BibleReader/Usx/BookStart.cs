@@ -1,4 +1,4 @@
-﻿using BibleReader.Usx.Interfaces;
+﻿using BibleReader.Usx.Styles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +24,6 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static BookStart Create(XElement element) => new BookStart(element);
-        public Run ToRun() => new Run(Text);
+        public Run ToRun() => UsxRunStyle.ApplyStyle(Style)(new Run(Text));
     }
 }

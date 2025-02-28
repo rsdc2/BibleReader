@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Windows.Documents;
+using BibleReader.Usx.Styles;
 
 namespace BibleReader.Usx;
 
@@ -27,5 +28,6 @@ internal class UsxText : IUsxNode, IAtomicText
         Node = text;
     }
     public static UsxText Create(XText text) => new UsxText(text);
-    public Run ToRun() => new Run(Text);
+    public Run ToRun() => UsxRunStyle.ApplyStyle(Style)(new Run(Text));
+
 }
