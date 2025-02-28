@@ -22,6 +22,12 @@ internal class UsxRunStyle
         run.Typography.Capitals = FontCapitals.AllSmallCaps;
         return run;
     }
+    public static Run Mt1(Run run)
+    {
+        run.FontSize = 20;
+        run.Typography.Capitals = FontCapitals.SmallCaps;
+        return run;
+    }
     public static Run V(Run run)
     {
         run.Text = " " + run.Text + " ";
@@ -36,6 +42,7 @@ internal class UsxRunStyle
     {
         "h" => H,
         "id" => Id,
+        "mt1" => Mt1,
         "v" => V,
         _ => Normal
     };

@@ -38,12 +38,17 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static Para Create(XElement element) => new Para(element);
-        public Paragraph ToParagraph()
+        public Paragraph? ToParagraph() => Style switch
+        {
+            "toc1" => null,
+            "toc2" => null,
+            "h" => null,
+            _ => _ToParagraph(),
+        };
+        private Paragraph _ToParagraph() 
         {
             Paragraph paragraph = new Paragraph();
-            var runs = this.ToRuns();
-            paragraph.Inlines.AddRange(runs);
-
+            paragraph.Inlines.AddRange(this.ToRuns());
             return UsxParaStyle.ApplyStyle(Style)(paragraph);
         }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());

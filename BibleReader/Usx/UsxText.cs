@@ -12,7 +12,8 @@ namespace BibleReader.Usx;
 internal class UsxText : IUsxNode, IAtomicText
 {
     public XNode Node { get; }
-    public IEnumerable<XText> TextNodes {
+    public IEnumerable<XText> TextNodes
+    {
         get => [(XText)Node];
     }
     public string Style
@@ -28,6 +29,13 @@ internal class UsxText : IUsxNode, IAtomicText
         Node = text;
     }
     public static UsxText Create(XText text) => new UsxText(text);
-    public Run ToRun() => UsxRunStyle.ApplyStyle(Style)(new Run(Text));
-
+    public Run ToRun() => Style switch
+    {
+        "toc1" => new Run(""),
+        "toc2" => new Run(""),
+        "toc3" => new Run(""),
+        "p" => new Run(Text),
+        "" => new Run(""),
+        _ => UsxRunStyle.ApplyStyle(Style)(new Run(Text))
+    };
 }

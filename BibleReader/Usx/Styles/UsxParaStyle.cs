@@ -20,6 +20,11 @@ public class UsxParaStyle
         para.TextAlignment = TextAlignment.Center;
         return para;
     }
+    public static Paragraph Mt1(Paragraph para)
+    {
+        para.TextAlignment = TextAlignment.Center;
+        return para;
+    }
     public static Paragraph Normal(Paragraph run)
     {
         return run;
@@ -29,6 +34,7 @@ public class UsxParaStyle
     {
         "h" => H,
         "id" => Id,
+        "mt1" => Mt1,
         _ => Normal
     };
 }

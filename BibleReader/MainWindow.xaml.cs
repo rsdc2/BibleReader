@@ -20,9 +20,8 @@ public partial class MainWindow : Window
 
         FlowDocument doc = new FlowDocument();
 
-        UsxDoc usx = UsxDoc.FromPath("Resources/gen.usx");
-        var paras = usx.Paras.Select(UsxElement.ToParagraph).ToList();
-        //IEnumerable<Paragraph> paras = paras.Select
+        UsxDoc usx = UsxDoc.FromPath("Resources/tnt/mat.usx");
+        var paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
         doc.Blocks.AddRange(paras);
 
         bibleDocReader.Document = doc;

@@ -362,5 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-BibleReader/Resources/*.xml
-BibleReader/Resources/*.usx
+BibleReader/Resources/**/*.xml
+BibleReader/Resources/**/*.usx

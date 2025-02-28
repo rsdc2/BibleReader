@@ -38,8 +38,5 @@ public class UsxElement
         "char" => false,
         _ => false
     };
-
-
-    public static Paragraph ToParagraph(Para para) => para.ToParagraph();
-
+    public static Paragraph? ToParagraph(Para para) => para.ToParagraph();
 }
