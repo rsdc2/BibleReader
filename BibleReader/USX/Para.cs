@@ -16,9 +16,10 @@ namespace BibleReader.Usx
     {
         public XNode Node { get; }
         public XElement Element { get; }
+        public IEnumerable<XNode> Descendants { get => Element.DescendantNodes(); }
         public string Style { get => Element.Attribute("style")?.Value ?? ""; }
         public IEnumerable<IAtomicText> AtomicTextNodes { 
-            get => Element.Nodes().Where(UsxNode.IsAtomicTextNode)
+            get => Element.DescendantNodes().Where(UsxNode.IsAtomicTextNode)
                                   .Select(node => (IAtomicText)UsxNode.Create(node)); 
         }
         public IEnumerable<IUsxElement> ChildElements { 

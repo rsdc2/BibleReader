@@ -13,13 +13,15 @@ namespace BibleReader.Usx
         public static IUsxNode Create(XNode node) => node.NodeType switch
         {
             XmlNodeType.Element => UsxElement.Create((XElement)node),
-            XmlNodeType.Text => UsxText.Create((XText)node)
+            XmlNodeType.Text => UsxText.Create((XText)node),
+            _ => throw new Exception("Cannot create UsxNode from node " + node.ToString())
         };
 
         public static bool IsAtomicTextNode(XNode node) => node.NodeType switch
         {
             XmlNodeType.Element => UsxElement.IsAtomicTextElement((XElement)node),
-            XmlNodeType.Text => true
+            XmlNodeType.Text => true,
+            _ => false
         };
     }
 }

@@ -9,34 +9,33 @@ using System.Xml;
 using System.Security.AccessControl;
 
 
-namespace BibleReader.Usx
+namespace BibleReader.Usx;
+
+internal class UsxDoc : IUsxElement, IHasChildren
 {
-    internal class UsxDoc : IUsxElement, IHasChildren
+    public XNode Node { get; }
+    public XElement Element { get; }
+    public IEnumerable<IUsxElement> ChildElements {
+        get => Element.Elements().Select(UsxElement.Create);
+    }
+    public IEnumerable<IUsxNode> ChildNodes
     {
-        public XNode Node { get; }
-        public XElement Element { get; }
-        public IEnumerable<IUsxElement> ChildElements {
-            get => Element.Elements().Select(UsxElement.Create);
-        }
-        public IEnumerable<IUsxNode> ChildNodes
-        {
-            get => Element.Nodes().Select(UsxNode.Create);
-        }
-        public IEnumerable<Para> Paras
-        {
-            get => ChildElements.OfType<Para>();
-        }
-        public UsxDoc(XElement element)
-        {
-            Element = element;
-            Node = element;
-        }
-        public static UsxDoc FromPath(string path)
-        {
-            var xmlDoc = XDocument.Load(path);
-            XElement? rootElem = xmlDoc.Root;
-            if (rootElem is null) throw new Exception("No root element");
-            return new UsxDoc(rootElem);
-        }
+        get => Element.Nodes().Select(UsxNode.Create);
+    }
+    public IEnumerable<Para> Paras
+    {
+        get => ChildElements.OfType<Para>();
+    }
+    public UsxDoc(XElement element)
+    {
+        Element = element;
+        Node = element;
+    }
+    public static UsxDoc FromPath(string path)
+    {
+        var xmlDoc = XDocument.Load(path);
+        XElement? rootElem = xmlDoc.Root;
+        if (rootElem is null) throw new Exception("No root element");
+        return new UsxDoc(rootElem);
     }
 }

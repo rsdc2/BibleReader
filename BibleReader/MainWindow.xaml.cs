@@ -27,7 +27,7 @@ public partial class MainWindow : Window
         openFileDialog.FilterIndex = 0;
         if (openFileDialog.ShowDialog() == true)
         {
-            UsxDoc usx = UsxDoc.FromPath("Resources/tnt/mat.usx");
+            UsxDoc usx = UsxDoc.FromPath(openFileDialog.FileName);
             var paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
             FlowDocument doc = new FlowDocument();
             doc.Blocks.AddRange(paras);

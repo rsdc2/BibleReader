@@ -34,6 +34,10 @@ internal class UsxRunStyle
         run.Typography.Variants = FontVariants.Superscript;
         return run;
     }
+    public static Run W(Run run)
+    {
+        return run;
+    }
     public static Run Normal(Run run)
     {
         return run;
@@ -44,6 +48,7 @@ internal class UsxRunStyle
         "id" => Id,
         "mt1" => Mt1,
         "v" => V,
+        "w" => W,
         _ => Normal
     };
 }

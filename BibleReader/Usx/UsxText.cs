@@ -35,6 +35,7 @@ internal class UsxText : IUsxNode, IAtomicText
         "toc2" => new Run(""),
         "toc3" => new Run(""),
         "p" => new Run(Text),
+        "w" => new Run(Text + " "),
         "" => new Run(""),
         _ => UsxRunStyle.ApplyStyle(Style)(new Run(Text))
     };
