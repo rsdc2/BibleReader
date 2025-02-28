@@ -9,7 +9,7 @@
     <Grid>
         <DockPanel>
             <ToolBar DockPanel.Dock="Top">
-                <Button Click="menuLoadBible_Click">Load</Button>
+                <Button Click="LoadBible">Load</Button>
             </ToolBar>
 
             <FlowDocumentReader Name="bibleDocReader" />

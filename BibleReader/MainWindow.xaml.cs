@@ -20,7 +20,7 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void menuLoadBible_Click(object sender, RoutedEventArgs e)
+    private void LoadBible(object sender, RoutedEventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog();
         openFileDialog.Filter = "USX Files (*.usx)|*.usx";
