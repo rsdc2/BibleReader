@@ -1,6 +1,4 @@
-using BibleReader;
-
-namespace BibleReader.Tests;
+namespace BibleReader.Tests.Usx;
 
 public class Tests
 {
