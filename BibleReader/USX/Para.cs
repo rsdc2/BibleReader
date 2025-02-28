@@ -39,6 +39,13 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static Para Create(XElement element) => new Para(element);
+        public static Para Create(string style, IEnumerable<XNode> children)
+        {
+            var paraNode = new XElement("para", children);
+            paraNode.SetAttributeValue("style", style);
+            var para = new Para(paraNode);
+            return para;
+        }
         public Paragraph? ToParagraph() => Style switch
         {
             "toc1" => null,
