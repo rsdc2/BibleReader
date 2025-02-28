@@ -7,9 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <WrapPanel>
-            <Button x:Name="btnOpenFileDlg" Click="btnOpenFileDlg_Click">Load</Button>
-        </WrapPanel>
-        <FlowDocumentReader Name="bibleDocReader" />
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Open" Click="btnOpenFileDlg_Click"/>
+                </MenuItem>
+            </Menu>
+
+            <FlowDocumentReader Name="bibleDocReader" />
+        </DockPanel>
     </Grid>
 </Window>

@@ -35,4 +35,9 @@ public partial class MainWindow : Window
         }
 
     }
+
+    private void MenuItem_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
