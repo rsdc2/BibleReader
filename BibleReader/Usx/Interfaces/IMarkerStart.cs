@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx.Interfaces
 {
-    public interface IEndMarker 
+    public interface IMarkerStart : IMarker
     {
-        string? Eid { get; }
+        string? Sid { get; } 
     }
 }

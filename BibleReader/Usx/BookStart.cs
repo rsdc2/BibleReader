@@ -9,10 +9,11 @@ using System.Xml.Linq;
 using System.Windows.Documents;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Cryptography;
+using BibleReader.Usx.Interfaces;
 
 namespace BibleReader.Usx
 {
-    internal class BookStart : IUsxElement, IAtomicText
+    internal class BookStart : IUsxElement, IAtomicText, IChildOfUsx
     {
         public XElement Element { get; }
         public XNode Node { get; }

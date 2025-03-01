@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx.Interfaces
 {
-    public interface IStartMarker : IMarker
+    internal interface IChildOfPara
     {
-        string? Sid { get; } 
     }
 }

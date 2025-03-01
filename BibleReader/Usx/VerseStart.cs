@@ -11,7 +11,7 @@ using System.Windows.Documents;
 
 namespace BibleReader.Usx;
 
-public class VerseStart : IUsxElement, IStartMarker, IAtomicText
+public class VerseStart : IUsxElement, IMarkerStart, IAtomicText, IChildOfPara
 {
     public XElement Element { get; init; }
     public XNode Node { get; }

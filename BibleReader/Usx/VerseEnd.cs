@@ -9,7 +9,7 @@ using BibleReader.Usx.Interfaces;
 
 namespace BibleReader.Usx
 {
-    internal class VerseEnd : IUsxElement, IEndMarker
+    internal class VerseEnd : IUsxElement, IMarkerEnd, IChildOfPara
     {
         public string? Eid { get => Element.Attribute("eid")?.Value; }
         public XElement Element { get; init; }

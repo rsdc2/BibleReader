@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace BibleReader.Usx
 {
-    public class ChapterEnd : IUsxElement, IEndMarker
+    public class ChapterEnd : IUsxElement, IMarkerEnd, IChildOfUsx
     {
         public string? Eid { get => Element.Attribute("eid")?.Value; }
         public XElement Element { get; init; }

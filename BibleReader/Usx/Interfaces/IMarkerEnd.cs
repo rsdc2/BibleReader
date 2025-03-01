@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx.Interfaces
 {
-    internal interface IHasChildren
+    public interface IMarkerEnd 
     {
-        IEnumerable<IUsxElement> ChildElements { get; }
-        IEnumerable<IUsxNode> ChildNodes { get; }   
+        string? Eid { get; }
     }
 }

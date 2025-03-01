@@ -9,7 +9,7 @@ using System.Windows.Documents;
 
 namespace BibleReader.Usx
 {
-    public class ChapterStart : IUsxElement, IStartMarker, IAtomicText
+    public class ChapterStart : IUsxElement, IMarkerStart, IAtomicText, IChildOfUsx
     {
         public XElement Element { get; init; }
         public XNode Node { get; }

@@ -12,7 +12,7 @@ using System.Windows.Documents;
 
 namespace BibleReader.Usx
 {
-    public class UsxPara : IUsxElement, IHasChildren, IHasTextChildren, IHasStyle
+    public class UsxPara : IUsxElement, IHasChildElements, IHasChildTextNodes, IHasStyle
     {
         public XNode Node { get; }
         public XElement Element { get; }
@@ -54,6 +54,7 @@ namespace BibleReader.Usx
         {
             "toc1" => null,
             "toc2" => null,
+            "toc3" => null,
             "h" => null,
             _ => _ToParagraph(),
         };

@@ -11,7 +11,7 @@ using System.Security.AccessControl;
 
 namespace BibleReader.Usx;
 
-public class UsxDoc : IUsxElement, IHasChildren
+public class UsxDoc : IUsxElement, IHasChildElements
 {
     public XNode Node { get; }
     public XElement Element { get; }

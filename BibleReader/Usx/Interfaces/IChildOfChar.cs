@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace BibleReader.Usx.Interfaces
 {
-    internal interface IHasTextChildren
+    internal interface IChildOfChar : IUsxNode, IAtomicText
     {
-        IEnumerable<IAtomicText> AtomicTextNodes { get; }
-        IEnumerable<Run> ToRuns();
     }
 }

@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Windows.Documents;
 using BibleReader.Usx.Styles;
+using BibleReader.Usx.Interfaces;
 
 namespace BibleReader.Usx;
 
-internal class UsxText : IUsxNode, IAtomicText
+internal class UsxText : IUsxNode, IAtomicText, IChildOfPara, IChildOfChar
 {
     public XNode Node { get; }
-    public IEnumerable<XText> TextNodes
-    {
-        get => [(XText)Node];
-    }
     public string Style
     {
         get {

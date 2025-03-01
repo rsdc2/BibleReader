@@ -10,7 +10,7 @@ using System.Windows.Documents;
 
 namespace BibleReader.Usx
 {
-    public class UsxChar : IUsxElement, IHasChildren, IHasTextChildren, IHasStyle
+    public class UsxChar : IUsxElement, IHasChildElements, IHasChildTextNodes, IHasStyle, IChildOfPara
     {
         public XNode Node { get; }
         public XElement Element { get; }
