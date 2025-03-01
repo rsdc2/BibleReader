@@ -22,9 +22,9 @@ public class UsxDoc : IUsxElement, IHasChildren
     {
         get => Element.Nodes().Select(UsxNode.Create);
     }
-    public IEnumerable<Para> Paras
+    public IEnumerable<UsxPara> Paras
     {
-        get => ChildElements.OfType<Para>();
+        get => ChildElements.OfType<UsxPara>();
     }
     public UsxDoc(XElement element)
     {

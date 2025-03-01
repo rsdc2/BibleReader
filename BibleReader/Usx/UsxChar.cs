@@ -10,7 +10,7 @@ using System.Windows.Documents;
 
 namespace BibleReader.Usx
 {
-    internal class Char : IUsxElement, IHasChildren, IHasTextChildren, IHasStyle
+    public class UsxChar : IUsxElement, IHasChildren, IHasTextChildren, IHasStyle
     {
         public XNode Node { get; }
         public XElement Element { get; }
@@ -33,18 +33,22 @@ namespace BibleReader.Usx
                                 .Select(elem => (IHasStyle)elem);
         }
         public string Style { get => Element.Attribute("style")?.Value ?? ""; }
-        public Char(XElement element)
+        public UsxChar(XElement element)
         {
             Element = element;
             Node = element;
         }
-        public static Char Create(XElement element) => new Char(element);
-        public static Char Create(string style, IEnumerable<XNode> children)
+        public static UsxChar Create(XElement element) => new UsxChar(element);
+        public static UsxChar Create(string style, IEnumerable<XNode> children)
         {
             var charNode = new XElement("char", children);
             charNode.SetAttributeValue("style", style);
-            var usxChar = new Char(charNode);
+            var usxChar = new UsxChar(charNode);
             return usxChar;
+        }
+        public static UsxChar Create(string style, string text)
+        {
+            return UsxChar.Create(style, [new XText(text)]);
         }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
         public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }

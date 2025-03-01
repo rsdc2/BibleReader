@@ -12,7 +12,7 @@ using System.Windows.Documents;
 
 namespace BibleReader.Usx
 {
-    public class Para : IUsxElement, IHasChildren, IHasTextChildren, IHasStyle
+    public class UsxPara : IUsxElement, IHasChildren, IHasTextChildren, IHasStyle
     {
         public XNode Node { get; }
         public XElement Element { get; }
@@ -33,18 +33,22 @@ namespace BibleReader.Usx
             get => ChildElements.Where(elem => elem.Element.Attribute("style") is not null)
                                 .Select(elem => (IHasStyle)elem );
         }
-        public Para(XElement element)
+        public UsxPara(XElement element)
         {
             Element = element;
             Node = element;
         }
-        public static Para Create(XElement element) => new Para(element);
-        public static Para Create(string style, IEnumerable<XNode> children)
+        public static UsxPara Create(XElement element) => new UsxPara(element);
+        public static UsxPara Create(string style, IEnumerable<XNode> children)
         {
             var paraNode = new XElement("para", children);
             paraNode.SetAttributeValue("style", style);
-            var para = new Para(paraNode);
+            var para = new UsxPara(paraNode);
             return para;
+        }
+        public static UsxPara Create(string style, IEnumerable<IUsxNode> children)
+        {
+            return UsxPara.Create(style, children.Select(child => child.Node));
         }
         public Paragraph? ToParagraph() => Style switch
         {
