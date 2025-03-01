@@ -18,7 +18,11 @@ internal class UsxText : IUsxNode, IAtomicText
     }
     public string Style
     {
-        get => ((IHasStyle)UsxElement.Create(Node.Parent)).Style ?? "";
+        get {
+            if (Node.Parent is null) 
+                throw new Exception($"Node {Node} has no parent so cannot infer style");
+            return ((IHasStyle)UsxElement.Create(Node.Parent)).Style ?? "";
+        }
     }
     public string Text
     {
@@ -29,11 +33,9 @@ internal class UsxText : IUsxNode, IAtomicText
         Node = text;
     }
     public static UsxText Create(XText text) => new UsxText(text);
+    public static UsxText Create(string text) => new UsxText(new XText(text));
     public Run ToRun() => Style switch
     {
-        "toc1" => new Run(""),
-        "toc2" => new Run(""),
-        "toc3" => new Run(""),
         "" => new Run(""),
         "p" => UsxRunStyle.ApplyStyle(Style)(new Run(Text)),
         "w" => UsxRunStyle.ApplyStyle(Style)(new Run(Text + " ")),

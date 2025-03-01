@@ -20,6 +20,12 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static VerseEnd Create(XElement element) => new VerseEnd(element);
-        public override string ToString() => $"VerseStart(sid='{Eid}')";
+        public static VerseEnd Create(string eid)
+        {
+            var verseEndElem = new XElement("verse");
+            verseEndElem.SetAttributeValue("eid", eid);
+            return new VerseEnd(verseEndElem);
+        }
+        public override string ToString() => $"VerseEnd(sid='{Eid}')";
     }
 }

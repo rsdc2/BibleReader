@@ -17,7 +17,6 @@ namespace BibleReader.Usx
             Element = element;
             Node = element;
         }
-
         public static Misc Create(XElement element) => new Misc(element);
     }
 }

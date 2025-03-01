@@ -36,7 +36,7 @@ public partial class MainWindow : Window
         FlowDocument doc = new FlowDocument();
         try
         {
-            UsxDoc usx = UsxDoc.FromPath(openFileDialog.FileName);
+            UsxDoc usx = UsxDoc.CreateFromPath(openFileDialog.FileName);
             var paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
             doc.Blocks.AddRange(paras);
             bibleDocReader.IsTwoPageViewEnabled = true;

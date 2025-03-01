@@ -31,7 +31,7 @@ public class UsxDoc : IUsxElement, IHasChildren
         Element = element;
         Node = element;
     }
-    public static UsxDoc FromPath(string path)
+    public static UsxDoc CreateFromPath(string path)
     {
         var xmlDoc = XDocument.Load(path);
         XElement? rootElem = xmlDoc.Root;

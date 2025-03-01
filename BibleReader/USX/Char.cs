@@ -39,6 +39,15 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static Char Create(XElement element) => new Char(element);
+        public static Char Create(string style, IEnumerable<XNode> children)
+        {
+            var charNode = new XElement("char", children);
+            charNode.SetAttributeValue("style", style);
+            var usxChar = new Char(charNode);
+            return usxChar;
+        }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
+        public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }
+        public override string ToString() => $"Char(style='{Style}' text='{this.RunText}')";
     }
 }

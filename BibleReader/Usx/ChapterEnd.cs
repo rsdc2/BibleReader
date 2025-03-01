@@ -19,6 +19,12 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static ChapterEnd Create(XElement element) => new ChapterEnd(element);
+        public static ChapterEnd Create(string eid)
+        {
+            var chapterEndElem = new XElement("chapter");
+            chapterEndElem.SetAttributeValue("eid", eid);
+            return new ChapterEnd(chapterEndElem);
+        }
         public override string ToString() => 
             $"ChapterEnd(sid='{Eid}')";
     }

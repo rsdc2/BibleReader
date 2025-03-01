@@ -24,6 +24,14 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static ChapterStart Create(XElement element) => new ChapterStart(element);
+        public static ChapterStart Create(string style, string number, string sid)
+        {
+            var verseStartElem = new XElement("verse");
+            verseStartElem.SetAttributeValue("style", style);
+            verseStartElem.SetAttributeValue("number", number);
+            verseStartElem.SetAttributeValue("sid", sid);
+            return new ChapterStart(verseStartElem);
+        }
         public Run ToRun() => new Run(Text);
         public override string ToString() => $"ChapterStart(sid='{Sid}' style='{Style}' number='{Number}')";
         public string ReaderString

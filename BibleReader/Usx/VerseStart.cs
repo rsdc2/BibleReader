@@ -28,8 +28,16 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static VerseStart Create(XElement element) => new VerseStart(element);
+        public static VerseStart Create(string style, string number, string sid)
+        {
+            var verseStartElem = new XElement("verse");
+            verseStartElem.SetAttributeValue("style", style);
+            verseStartElem.SetAttributeValue("number", number);
+            verseStartElem.SetAttributeValue("sid", sid);
+            return new VerseStart(verseStartElem);
+        }
         public Run ToRun() => UsxRunStyle.ApplyStyle(Style)(new Run(Text));
-        public override string ToString() => $"VerseEnd(eid='{Sid}' style='{Style}' number='{Number}')";
+        public override string ToString() => $"VerseStart(eid='{Sid}' style='{Style}' number='{Number}')";
 
     }
 }

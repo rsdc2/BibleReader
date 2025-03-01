@@ -9,8 +9,8 @@ public class UsxDoc_Tests
     [SetUp]
     public void Setup()
     {
-        _minimalWithChars = UsxDoc.FromPath("Resources/MinimalWithChars.xml");
-        _minimalNoChars = UsxDoc.FromPath("Resources/MinimalNoChars.xml");
+        _minimalWithChars = UsxDoc.CreateFromPath("Resources/MinimalWithChars.xml");
+        _minimalNoChars = UsxDoc.CreateFromPath("Resources/MinimalNoChars.xml");
     }
 
     [Test]
@@ -19,7 +19,7 @@ public class UsxDoc_Tests
         // Arrange
 
         // Act
-        UsxDoc doc = UsxDoc.FromPath("Resources/MinimalWithChars.xml");
+        UsxDoc doc = UsxDoc.CreateFromPath("Resources/MinimalWithChars.xml");
 
         // Assert
         Assert.That(doc.Element.Name.LocalName.Equals("usx"));

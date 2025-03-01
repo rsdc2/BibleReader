@@ -60,6 +60,7 @@ namespace BibleReader.Usx
             return UsxParaStyle.ApplyStyle(Style)(paragraph);
         }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
-        public override string ToString() => $"Para()";
+        public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }
+        public override string ToString() => $"Para(style='{Style}' text='{RunText}')";
     }
 }
