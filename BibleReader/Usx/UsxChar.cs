@@ -51,6 +51,7 @@ namespace BibleReader.Usx
             return UsxChar.Create(style, [new XText(text)]);
         }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
+        public Run ToRun() => new Run(RunText);
         public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }
         public override string ToString() => $"Char(style='{Style}' text='{this.RunText}')";
     }
