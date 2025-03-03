@@ -10,6 +10,7 @@
         <DockPanel>
             <ToolBar DockPanel.Dock="Top">
                 <Button Click="LoadBible">Load</Button>
+                <ToggleButton Name="toggleXmlView" Click="ToggleXmlView" IsChecked="False">XML</ToggleButton>
             </ToolBar>
 
             <FlowDocumentReader Name="bibleDocReader" />

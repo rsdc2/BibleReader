@@ -26,6 +26,7 @@ public class UsxDoc : IUsxElement, IHasChildElements
     {
         get => ChildElements.OfType<UsxPara>();
     }
+    public string XmlText { get => Node.ToString(); }
     public UsxDoc(XElement element)
     {
         Element = element;

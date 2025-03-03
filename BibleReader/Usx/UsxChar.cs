@@ -16,8 +16,9 @@ namespace BibleReader.Usx
         public XElement Element { get; }
         public IEnumerable<IAtomicText> AtomicTextNodes
         {
-            get => Element.DescendantNodes().Where(UsxNode.IsAtomicTextNode)
-                                  .Select(node => (IAtomicText)UsxNode.Create(node));
+            get => Element.DescendantNodes()
+                          .Where(UsxNode.IsAtomicTextNode)
+                          .Select(node => (IAtomicText)UsxNode.Create(node));
         }
         public IEnumerable<IUsxElement> ChildElements
         {
@@ -31,6 +32,10 @@ namespace BibleReader.Usx
         {
             get => ChildElements.Where(elem => elem.Element.Attribute("style") is not null)
                                 .Select(elem => (IHasStyle)elem);
+        }
+        public string XmlText
+        {
+            get => Node.ToString();
         }
         public string Style { get => Element.Attribute("style")?.Value ?? ""; }
         public UsxChar(XElement element)
@@ -51,6 +56,7 @@ namespace BibleReader.Usx
             return UsxChar.Create(style, [new XText(text)]);
         }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
+        //public IEnumerable<Run> ToXmlRuns() => ChildNodes.Select(node => node.Node.ToString());
         public Run ToRun() => new Run(RunText);
         public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }
         public override string ToString() => $"Char(style='{Style}' text='{this.RunText}')";

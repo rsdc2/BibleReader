@@ -66,6 +66,7 @@ namespace BibleReader.Usx
         }
         public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
         public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }
+        public Run XmlRun { get => new Run(Node.ToString()); }
         public override string ToString() => $"Para(style='{Style}' text='{RunText}')";
     }
 }

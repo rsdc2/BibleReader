@@ -15,6 +15,7 @@ namespace BibleReader;
 
 public partial class MainWindow : Window
 {
+    string _filePath;
     public MainWindow()
     {
         InitializeComponent();
@@ -27,17 +28,29 @@ public partial class MainWindow : Window
         openFileDialog.FilterIndex = 0;
         if (openFileDialog.ShowDialog() == true)
         {
-            HandleLoadBible(openFileDialog);
+            _filePath = openFileDialog.FileName;
+            HandleLoadBible();
         }
     }
 
-    public void HandleLoadBible(OpenFileDialog openFileDialog)
+    public void HandleLoadBible()
     {
+        if (_filePath is null) return;
+        
         FlowDocument doc = new FlowDocument();
         try
         {
-            UsxDoc usx = UsxDoc.CreateFromPath(openFileDialog.FileName);
-            var paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
+            UsxDoc usx = UsxDoc.CreateFromPath(_filePath);
+            IEnumerable<Paragraph> paras;
+
+            if (toggleXmlView.IsChecked == true)
+            {
+                paras = [new Paragraph(new Run(usx.XmlText))];
+            }
+            else
+            {
+                paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
+            }
             doc.Blocks.AddRange(paras);
             bibleDocReader.IsTwoPageViewEnabled = true;
         }
@@ -51,6 +64,11 @@ public partial class MainWindow : Window
         {
             bibleDocReader.Document = doc;
         }
+    }
+
+    public void ToggleXmlView(object sender, RoutedEventArgs e)
+    {
+        HandleLoadBible();
     }
 
 }
