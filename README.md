@@ -3,7 +3,7 @@
 This Bible Reader Windows application displays Bible files in the [`.usx` XML-based file format](https://markups.paratext.org/usx/). 
 
 ![Alt text](Readme.Resources/TyndaleMat.png "Tyndale's translation of Matthew's gospel")
-|*Tyndale's translation of Matthew in BibleReader (translation from [fetch.bible](https://fetch.bible/content/bibles/))*|
+*Tyndale's translation of Matthew in BibleReader (translation from [fetch.bible](https://fetch.bible/content/bibles/))*
 
 ## Development environment and running requirements
 
