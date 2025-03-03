@@ -10,7 +10,7 @@ using BibleReader.Usx.Interfaces;
 
 namespace BibleReader.Usx;
 
-internal class UsxText : IUsxNode, IAtomicText, IChildOfPara, IChildOfChar
+public class UsxText : IUsxNode, IAtomicText, IChildOfPara, IChildOfChar
 {
     public XNode Node { get; }
     public string Style

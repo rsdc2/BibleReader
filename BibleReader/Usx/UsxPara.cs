@@ -26,7 +26,7 @@ namespace BibleReader.Usx
             get => Element.Elements().Select(UsxElement.Create); 
         }
         public IEnumerable<IUsxNode> ChildNodes {
-            get => Element.Nodes().Select(UsxNode.Create);
+            get => Element.Nodes().Select(node => (IChildOfPara)UsxNode.Create(node));
         }
         public IEnumerable<IHasStyle> StyleNodes
         {
@@ -39,14 +39,14 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static UsxPara Create(XElement element) => new UsxPara(element);
-        public static UsxPara Create(string style, IEnumerable<XNode> children)
+        private static UsxPara Create(string style, IEnumerable<XNode> children)
         {
             var paraNode = new XElement("para", children);
             paraNode.SetAttributeValue("style", style);
             var para = new UsxPara(paraNode);
             return para;
         }
-        public static UsxPara Create(string style, IEnumerable<IUsxNode> children)
+        public static UsxPara Create(string style, IEnumerable<IChildOfPara> children)
         {
             return UsxPara.Create(style, children.Select(child => child.Node));
         }

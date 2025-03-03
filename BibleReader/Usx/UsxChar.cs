@@ -25,7 +25,7 @@ namespace BibleReader.Usx
         }
         public IEnumerable<IUsxNode> ChildNodes
         {
-            get => Element.Nodes().Select(UsxNode.Create);
+            get => Element.Nodes().Select(node => (IChildOfChar)UsxNode.Create(node));
         }
         public IEnumerable<IHasStyle> StyleNodes
         {
@@ -39,7 +39,7 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static UsxChar Create(XElement element) => new UsxChar(element);
-        public static UsxChar Create(string style, IEnumerable<XNode> children)
+        private static UsxChar Create(string style, IEnumerable<XNode> children)
         {
             var charNode = new XElement("char", children);
             charNode.SetAttributeValue("style", style);

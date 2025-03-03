@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BibleReader.Usx.Interfaces
 {
-    internal interface IChildOfPara
+    public interface IChildOfPara : IUsxNode
     {
     }
 }

@@ -15,7 +15,7 @@ namespace BibleReader.Tests.Usx
         public void Test_ParaWithTextChildren_HasCorrectText()
         {
             // Arrange
-            var text = new XText("Some text");
+            var text = UsxText.Create("Some text");
             var para = UsxPara.Create("p", [text]);
 
             // Act
@@ -39,6 +39,16 @@ namespace BibleReader.Tests.Usx
 
             // Assert
             Assert.That(firstRun.Text, Is.EqualTo("Some text "));
+        }
+
+        [Test]
+        public void Test_CannotCreate_Para_WithInvalidChildren()
+        {
+            // Arrange
+            var bookStart = BookStart.Create("GEN", "id", "Genesis");
+
+            //// Act 
+            //Assert.That(UsxPara.Create("p", [bookStart]));
         }
     }
 }

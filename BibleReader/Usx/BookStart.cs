@@ -13,7 +13,7 @@ using BibleReader.Usx.Interfaces;
 
 namespace BibleReader.Usx
 {
-    internal class BookStart : IUsxElement, IAtomicText, IChildOfUsx
+    public class BookStart : IUsxElement, IAtomicText, IChildOfUsx
     {
         public XElement Element { get; }
         public XNode Node { get; }
