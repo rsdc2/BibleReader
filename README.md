@@ -2,6 +2,8 @@
 
 This Bible Reader Windows application displays Bible files in the [`.usx` XML-based file format](https://markups.paratext.org/usx/). 
 
+![Alt text](Readme.Resources/TyndaleMat.png "Tyndale's translation of Matthew's gospel")
+
 ## Development environment and running requirements
 
 The Reader is written in C# (.NET Core 8). The GUI is written with [WPF](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-9.0). To run the application, you will need:
