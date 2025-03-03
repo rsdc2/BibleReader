@@ -8,6 +8,6 @@ namespace BibleReader.Usx.Interfaces
 {
     internal interface IHasChildNodes
     {
-        IEnumerable<IUsxNode> ChildNodes { get; }
+        IEnumerable<IUsxNode> UsxNodes { get; }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Xml.Linq;
 
 namespace BibleReader.Usx
@@ -18,5 +19,7 @@ namespace BibleReader.Usx
             Node = element;
         }
         public static Misc Create(XElement element) => new Misc(element);
+        public IEnumerable<Run> ToRuns() => [];
+
     }
 }

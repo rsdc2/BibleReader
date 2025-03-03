@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using BibleReader.Usx.Interfaces;
+using System.Windows.Documents;
 
 namespace BibleReader.Usx
 {
@@ -26,6 +27,7 @@ namespace BibleReader.Usx
             verseEndElem.SetAttributeValue("eid", eid);
             return new VerseEnd(verseEndElem);
         }
+        public IEnumerable<Run> ToRuns() => [];
         public override string ToString() => $"VerseEnd(sid='{Eid}')";
     }
 }

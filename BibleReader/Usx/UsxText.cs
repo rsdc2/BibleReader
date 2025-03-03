@@ -15,7 +15,8 @@ public class UsxText : IUsxNode, IAtomicText, IChildOfPara, IChildOfChar
     public XNode Node { get; }
     public string Style
     {
-        get {
+        get 
+        {
             if (Node.Parent is null) 
                 throw new Exception($"Node {Node} has no parent so cannot infer style");
             return ((IHasStyle)UsxElement.Create(Node.Parent)).Style ?? "";
@@ -38,4 +39,5 @@ public class UsxText : IUsxNode, IAtomicText, IChildOfPara, IChildOfChar
         "w" => UsxRunStyle.ApplyStyle(Style)(new Run(Text + " ")),
         _ => UsxRunStyle.ApplyStyle(Style)(new Run(Text))
     };
+    public IEnumerable<Run> ToRuns() => [ToRun()];
 }

@@ -11,6 +11,16 @@ namespace BibleReader.Tests.Usx
 {
     internal class Char_Tests
     {
+        UsxDoc? _minimalWithChars;
+        UsxDoc? _minimalNoChars;
+
+        [SetUp]
+        public void Setup()
+        {
+            _minimalWithChars = UsxDoc.CreateFromPath("Resources/MinimalWithChars.xml");
+            _minimalNoChars = UsxDoc.CreateFromPath("Resources/MinimalNoChars.xml");
+        }
+
         [Test]
         public void Test_RunFromChar_HasCorrectText()
         {

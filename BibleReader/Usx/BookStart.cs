@@ -34,5 +34,6 @@ namespace BibleReader.Usx
             return new BookStart(bookStartElem);
         }
         public Run ToRun() => UsxRunStyle.ApplyStyle(Style)(new Run(Text));
+        public IEnumerable<Run> ToRuns() => [ToRun()];
     }
 }

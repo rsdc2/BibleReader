@@ -49,7 +49,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                paras = usx.Paras.Select(UsxElement.ToParagraph).OfType<Paragraph>();
+                paras = usx.UsxParas.Select(UsxElement.ToParagraph).OfType<Paragraph>();
             }
             doc.Blocks.AddRange(paras);
             bibleDocReader.IsTwoPageViewEnabled = true;

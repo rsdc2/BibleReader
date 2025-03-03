@@ -16,23 +16,29 @@ namespace BibleReader.Usx
     {
         public XNode Node { get; }
         public XElement Element { get; }
-        public IEnumerable<XNode> Descendants { get => Element.DescendantNodes(); }
+        public IEnumerable<XNode> DescendantNodes { get => Element.DescendantNodes(); }
         public string Style { get => Element.Attribute("style")?.Value ?? ""; }
-        public IEnumerable<IAtomicText> AtomicTextNodes { 
-            get => Element.DescendantNodes().Where(UsxNode.IsAtomicTextNode)
-                                  .Select(node => (IAtomicText)UsxNode.Create(node)); 
+        public IEnumerable<IAtomicText> DescendantAtomicTextNodes 
+        { 
+            get => Element.DescendantNodes()
+                          .Where(UsxNode.IsAtomicTextNode)
+                          .Select(node => (IAtomicText)UsxNode.Create(node)); 
         }
-        public IEnumerable<IUsxElement> ChildElements { 
+        public IEnumerable<IUsxElement> UsxElements 
+        { 
             get => Element.Elements().Select(UsxElement.Create); 
         }
-        public IEnumerable<IUsxNode> ChildNodes {
+        public IEnumerable<IUsxNode> UsxNodes 
+        {
             get => Element.Nodes().Select(node => (IChildOfPara)UsxNode.Create(node));
         }
-        public IEnumerable<IHasStyle> StyleNodes
+        public IEnumerable<IUsxNode> DescendantUsxNodes
         {
-            get => ChildElements.Where(elem => elem.Element.Attribute("style") is not null)
-                                .Select(elem => (IHasStyle)elem );
+            get => UsxNodes.Select(node => node.DescendantUsxNodes.Prepend(node))
+                           .Aggregate((acc, nodes) => acc.Concat(nodes));
         }
+        public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }
+        public Run XmlRun { get => new Run(Node.ToString()); }
         public UsxPara(XElement element)
         {
             Element = element;
@@ -64,9 +70,10 @@ namespace BibleReader.Usx
             paragraph.Inlines.AddRange(this.ToRuns());
             return UsxParaStyle.ApplyStyle(Style)(paragraph);
         }
-        public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
-        public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }
-        public Run XmlRun { get => new Run(Node.ToString()); }
-        public override string ToString() => $"Para(style='{Style}' text='{RunText}')";
+        public IEnumerable<Run> ToRuns() {
+            return UsxNodes.Select(node => node.ToRuns())
+                                     .Aggregate((acc, nodes) => acc.Concat(nodes));
+        }
+        public override string ToString() => $"UsxPara(style='{Style}' text='{RunText}')";
     }
 }

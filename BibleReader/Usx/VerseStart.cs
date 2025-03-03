@@ -17,9 +17,6 @@ public class VerseStart : IUsxElement, IMarkerStart, IAtomicText, IChildOfPara
     public XNode Node { get; }
     public string? Sid { get => Element.Attribute("sid")?.Value; }
     public string Style { get => Element.Attribute("style")?.Value ?? ""; }
-    public IEnumerable<IHasStyle> StyleNodes {
-        get => [this];
-    }
     public string Text { get => Number ?? ""; }
     public string? Number { get => Element.Attribute("number")?.Value; }
     public VerseStart(XElement element) 
@@ -37,5 +34,6 @@ public class VerseStart : IUsxElement, IMarkerStart, IAtomicText, IChildOfPara
         return new VerseStart(verseStartElem);
     }
     public Run ToRun() => UsxRunStyle.ApplyStyle(Style)(new Run(Text));
+    public IEnumerable<Run> ToRuns() => [ToRun()];
     public override string ToString() => $"VerseStart(eid='{Sid}' style='{Style}' number='{Number}')";
 }

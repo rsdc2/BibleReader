@@ -14,24 +14,24 @@ namespace BibleReader.Usx
     {
         public XNode Node { get; }
         public XElement Element { get; }
-        public IEnumerable<IAtomicText> AtomicTextNodes
+        public IEnumerable<IUsxElement> UsxElements
+        {
+            get => Element.Elements().Select(UsxElement.Create);
+        }
+        public IEnumerable<IUsxNode> UsxNodes
+        {
+            get => Element.Nodes().Select(node => (IChildOfChar)UsxNode.Create(node));
+        }
+        public IEnumerable<IUsxNode> DescendantUsxNodes
+        {
+            get => UsxNodes.Select(node => node.DescendantUsxNodes.Prepend(node))
+                           .Aggregate((acc, nodes) => acc.Concat(nodes));
+        }
+        public IEnumerable<IAtomicText> DescendantAtomicTextNodes
         {
             get => Element.DescendantNodes()
                           .Where(UsxNode.IsAtomicTextNode)
                           .Select(node => (IAtomicText)UsxNode.Create(node));
-        }
-        public IEnumerable<IUsxElement> ChildElements
-        {
-            get => Element.Elements().Select(UsxElement.Create);
-        }
-        public IEnumerable<IUsxNode> ChildNodes
-        {
-            get => Element.Nodes().Select(node => (IChildOfChar)UsxNode.Create(node));
-        }
-        public IEnumerable<IHasStyle> StyleNodes
-        {
-            get => ChildElements.Where(elem => elem.Element.Attribute("style") is not null)
-                                .Select(elem => (IHasStyle)elem);
         }
         public string XmlText
         {
@@ -55,7 +55,7 @@ namespace BibleReader.Usx
         {
             return UsxChar.Create(style, [new XText(text)]);
         }
-        public IEnumerable<Run> ToRuns() => AtomicTextNodes.Select(text => text.ToRun());
+        public IEnumerable<Run> ToRuns() => DescendantAtomicTextNodes.Select(text => text.ToRun());
         //public IEnumerable<Run> ToXmlRuns() => ChildNodes.Select(node => node.Node.ToString());
         public Run ToRun() => new Run(RunText);
         public string RunText { get => this.ToRuns().Select(run => run.Text).Aggregate(string.Concat); }

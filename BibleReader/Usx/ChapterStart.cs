@@ -33,10 +33,12 @@ namespace BibleReader.Usx
             return new ChapterStart(verseStartElem);
         }
         public Run ToRun() => new Run(Text);
+        public IEnumerable<Run> ToRuns() => [ToRun()];
         public override string ToString() => $"ChapterStart(sid='{Sid}' style='{Style}' number='{Number}')";
         public string ReaderString
         {
             get => Number ?? "";
         }
+
     }
 }

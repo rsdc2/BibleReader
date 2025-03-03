@@ -31,9 +31,34 @@ public class UsxDoc_Tests
         // Arrange
 
         // Act
-        var paraCount = _minimalNoChars?.Paras.Count();
+        var paraCount = _minimalNoChars?.UsxParas.Count();
 
         // Assert
         Assert.That(paraCount.Equals(6));
+    }
+
+    [Test]
+    public void Test_ParseInvalidFile_ThrowsException()
+    {
+        // Arrange
+        var invalidFile = UsxDoc.CreateFromPath("Resources/MinimalNoCharsInvalid.xml");
+
+        // Act
+        var paras = invalidFile.UsxParas.ToList();
+
+        // Assert
+        Assert.That(() => paras[1].ToRuns(), Throws.Exception);
+    }
+    [Test]
+    public void Test_ParseValidFile_DoesNotThrowException()
+    {
+        // Arrange
+        var invalidFile = UsxDoc.CreateFromPath("Resources/MinimalNoChars.xml");
+
+        // Act
+        var runText = invalidFile.UsxParas.ToList()[5].RunText;
+
+        // Assert
+        Assert.That(runText, Is.EqualTo(" 2 This is an example verse"));
     }
 }

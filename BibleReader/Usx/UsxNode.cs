@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace BibleReader.Usx
 {
-    internal class UsxNode
+    public class UsxNode
     {
         public static IUsxNode Create(XNode node) => node.NodeType switch
         {

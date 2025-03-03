@@ -9,7 +9,7 @@ namespace BibleReader.Usx.Interfaces
 {
     internal interface IHasChildTextNodes : IHasChildNodes
     {
-        IEnumerable<IAtomicText> AtomicTextNodes { get; }
+        IEnumerable<IAtomicText> DescendantAtomicTextNodes { get; }
         IEnumerable<Run> ToRuns();
     }
 }
